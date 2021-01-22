@@ -1,0 +1,87 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript"
+        src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js">
+        //this is the web reciever API
+    </script>
+    <script src = "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.min.js"></script>
+</head>
+<body>
+    <canvas id = "my_canvas" class = "center"></canvas>
+    <script>
+        //this loads the web receiver framework
+        const context = cast.framework.CastReceiverContext.getInstance();
+        context.addCustomMessageListener('urn:x-cast:ch.cimnine.cromecast-test.text', function (customEvent) {
+            if (customEvent.data.type == "message") {
+            document.getElementById("message").innerHTML = customEvent.data.text;
+                }
+            });
+        context.start();
+    </script>
+    <div id="message"></div>
+    
+    <img name = "pic" width = "100%" height = "100%" class = "center" style = "display: none; margin-top: -150"/>
+    <embed id = "pdf1" src = "./Please_DocuSign_vasopr_(1).pdf" style="min-height:100vh;width:100%; display: none;"/>
+    <embed id = "pdf2" src = "./Tiger.pdf" style="min-height:100vh;width:100%; display:none"/>
+    
+        <!--The <iframe> (and video player) will replace this <div> tag.-->
+    <div id="player" style ="display: none" class = "center"></div>
+    
+    <script src = "receiver.js"></script>
+</body>
+</html>
+
+
+<!--
+<html>
+<head>
+  
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="color: white">
+  <div id="message"></div>
+  <script>
+  var i = 0;
+var images = [];
+var time = 10000;
+images[0] = "https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60";
+images[1] ="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60";
+images[2] ="https://images.unsplash.com/photo-1475809913362-28a064062ccd?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60";
+images[3] ="https://images.unsplash.com/photo-1501706362039-c06b2d715385?ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60";
+
+function oscillate(){
+    document.pic.src = images[i];
+    if(i<images.length -1)
+    {
+        i++;
+    }
+    else{
+        i=0;
+    }
+    setTimeout("oscillate()",time);
+}
+
+window.onload= oscillate;</script>
+
+  
+  <img name = "pic" width = "75%" height = "75%" class = "center"/>
+  <script>src = "receiver.js"</script>
+  <img name = "img1" src = "https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" width ="400" height = "200" style = "display:none"/>
+  <img name = "img2" src ="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" width ="400" height = "200" style = "display:none"/>
+  <img name = "img3" src ="https://images.unsplash.com/photo-1475809913362-28a064062ccd?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" width ="400" height = "200" style = "display:none"/>
+  <img name = "img4" src = "https://images.unsplash.com/photo-1501706362039-c06b2d715385?ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8YW5pbWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" width ="400" height = "200" style = "display:none"/>
+    <script>//src = "receiver.js"</script> 
+  <script>
+    //this loads the web receiver framework
+    const context = cast.framework.CastReceiverContext.getInstance();
+   context.addCustomMessageListener('urn:x-cast:ch.cimnine.cromecast-test.text', function (customEvent) {
+      if (customEvent.data.type == "message") {
+        document.getElementById("message").innerHTML = customEvent.data.text;
+      }
+    });
+    context.start();
+    console.log("bottom script working");
+  </script>
+</body>
+</html>-->
