@@ -1,0 +1,149 @@
+What patterns are allowed?
+
+  * days of week, 0=Sunday, 6=Saturday, e.g., "pattern: 135" MWF
+  * dates, e.g., "_/15/_" the 15th of every nonth, "3/15/_" every march 15, etc.
+
+[ 
+  { "weekdays": [135],
+    "startTime": "1230",
+    "duration": 60,
+
+    "interval": [5,10,318],
+    "resources": ["./kangaroo.jpg","./tiger.jpeg","./sample.mp4"]
+  },
+
+  { "month": 0,
+    "day": 25,
+    "startTime": "1230",
+    "duration": 60,
+
+    "interval": [5,10,318],
+    "resources": ["./kangaroo.jpg","./tiger.jpeg","./sample.mp4"]
+  },
+
+  { "month": 10,
+    "day": 15,
+
+    "resources": [["birthday", "Ruben"], "./birthday.html?name=Ruben"]
+  }
+]
+
+Get active rules:
+
+  Inputs date & time
+  Outout list of {...} from above.
+
+  Input : 1/1/2021, 12:45
+  Output: both of the rules above
+
+Merge resources:
+
+  Inputs: 1) Current list of resources
+          2) List of rules
+
+  Output: New list of resources
+
+    * Minimal changes on the list of resources
+    * Figure out which resources are no longer wanted, and get rid of them
+    * Add any resources to the end that are not already on the current list
+
+  Rationale: List of resources looks like
+
+    [ [sample.mp4, 318], [kangaroo.jpg, 5], [tiger.jpeg, 10], ...]
+
+
+Display engine:
+
+  current = []
+
+  forever {
+    rules = getactiverules (now)
+    current = merge (current, rules)
+    if current.length == 0 {
+      sleep 1 minute
+      continue
+    }
+    display (current[0]) # This thread will sleep for however many seconds in interval the display is on
+    current = current[1:] + current[0]
+  }
+
+{
+  "Monday": 
+            [
+                {
+                    "startTime": "1000",
+                    "duration": 30,
+                    "interval": [5,10,318],
+                    "month": 1,
+                    "day": 25,
+                    "resources": ["./kangaroo.jpg","./tiger.jpeg","./giraffe.png","./video.mp4"]
+                },
+                {
+                    "startTime": "~11.0.6",
+                    "duration": "~11.0.6",
+                    "interval": "~11.0.6",
+                    "month": "~11.0.6",
+                    "day": "~11.0.6",
+                    "resources": "~11.0.6"
+                }
+            ],
+        
+  "Tuesday": {
+    "startTime": "~11.0.6",
+    "duration": "~11.0.6",
+    "interval": "~11.0.6",
+    "month": "~11.0.6",
+    "day": "~11.0.6",
+    "resources": "~11.0.6"
+  },
+  "Wednesday": [
+    {
+        "startTime": "1355",
+        "duration": 1,
+        "interval": [5,10,13],
+        "month": 0,
+        "day": 20,
+        "resources": ["./kangaroo.jpg","./tiger.jpeg","./video.mp4"]
+    },
+    {
+        "startTime": "1356",
+        "duration": 1,
+        "interval": [5,10],
+        "month": 0,
+        "day": 20,
+        "resources": ["./kangaroo.jpg","./giraffe.png"]
+    }
+],
+  "Thursday": {
+    "startTime": "~11.0.6",
+    "duration": "~11.0.6",
+    "interval": "~11.0.6",
+    "month": "~11.0.6",
+    "day": "~11.0.6",
+    "resources": "~11.0.6"
+  },
+  "Friday": {
+    "startTime": "~11.0.6",
+    "duration": "~11.0.6",
+    "interval": "~11.0.6",
+    "month": "~11.0.6",
+    "day": "~11.0.6",
+    "resources": "~11.0.6"
+  },
+  "Saturday": {
+    "startTime": "~11.0.6",
+    "duration": "~11.0.6",
+    "interval": "~11.0.6",
+    "month": "~11.0.6",
+    "day": "~11.0.6",
+    "resources": "~11.0.6"
+  },
+  "Sunday": {
+    "startTime": "~11.0.6",
+    "duration": "~11.0.6",
+    "interval": "~11.0.6",
+    "month": "~11.0.6",
+    "day": "~11.0.6",
+    "resources": "~11.0.6"
+  }
+}
